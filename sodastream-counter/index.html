@@ -1,58 +1,70 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Sodastream Counter</title>
-    <meta charset="utf-8"/><html>
+
+    <!-- Bootstrap -->
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   </head>
   <body onload="addToLocalStorage()">
-    <div id="display-area">
-    </div>
-    <button onclick="clearLocalStorage()">Delete All Items</button>
+    <div class="container">
+      <p id="display-area" class="lead"></p>
+      <button type="button" class="btn btn-danger btn-lg btn-block" onclick="clearLocalStorage()">Delete All</button>
+
+    </div><!-- /.container -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+
+    function clearLocalStorage() {
+
+      localStorage.removeItem( 'sodastream_refills' );
+      document.getElementById('display-area').innerHTML = "You now have 0 Sodastream refills.";
+    }
+
+    function addToLocalStorage() {
+
+      // Get data from browser local storage
+      var data = localStorage.getItem( 'sodastream_refills' );
+
+      // The data is stringified, so you have
+      // to turn it into a JSON object
+      data = JSON.parse( data );
+
+      // Create the JSON object if local storage is null
+      if ( data == null ) {
+
+        data = {
+          items: []
+        };
+      }
+
+      // Insert the current timestamp into the data.items array
+      data.items.push({
+        "timestamp" : (new Date()).toISOString()
+      });
+
+      // Store the recently changed item in local storage
+      localStorage.setItem( 'sodastream_refills', JSON.stringify( data ) );
+
+      var output = "You now have " + data.items.length + " Sodastream refills.<br/>";
+
+      for ( let i = 0, l = data.items.length; i < l; i++ ) {
+
+        output += data.items[i].timestamp + "<br/>";
+      }
+
+      document.getElementById('display-area').innerHTML = output;
+    }
+
+    </script>
   </body>
-
-<script type="text/javascript">
-
-function clearLocalStorage() {
-
-  localStorage.removeItem( 'sodastream_refills' );
-  document.getElementById('display-area').innerHTML = "You now have 0 Sodastream refills.";
-}
-
-function addToLocalStorage() {
-
-  // Get data from browser local storage
-  var data = localStorage.getItem( 'sodastream_refills' );
-
-  // The data is stringified, so you have
-  // to turn it into a JSON object
-  data = JSON.parse( data );
-
-  // Create the JSON object if local storage is null
-  if ( data == null ) {
-
-    data = {
-      items: []
-    };
-  }
-  
-  // Insert the current timestamp into the data.items array
-  data.items.push({
-    "timestamp" : (new Date()).toISOString()
-  });
-
-  // Store the recently changed item in local storage
-  localStorage.setItem( 'sodastream_refills', JSON.stringify( data ) );
-
-  var output = "You now have " + data.items.length + " Sodastream refills.<br/>";
-
-  for ( let i = 0, l = data.items.length; i < l; i++ ) {
-
-    output += data.items[i].timestamp + "<br/>";
-  }
-
-  document.getElementById('display-area').innerHTML = output;
-}
-
-</script>
-
 </html>
