@@ -57,7 +57,8 @@
 
       var output = "You now have " + data.items.length + " Sodastream refills.<br/>";
 
-      for ( let i = 0, l = data.items.length; i < l; i++ ) {
+      // List the items top-down with the latest occurence first
+      for ( let l = data.items.length, i = l-1; i >= 0; i-- ) {
 
         output += new Date( data.items[i].timestamp ) + "<br/>";
       }
