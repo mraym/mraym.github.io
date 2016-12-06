@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title>Diesel or Benzene Enterprise Rental Car Calculator</title>
+
+	<!-- Bootstrap -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+
+<div class="container">
+
+	<div class="col-sm-8 col-sm-offset-2">
+		<h2>
+			Diesel or Benzene?<br/>
+			Enterprise Rental Car Calculator
+		</h2> 
+	</div>
+
+	<div class="col-sm-6 col-sm-offset-3">
+		<div class="form-group">
+			<label for="kmAmt">How many kilometers will you drive?</label>
+			<input type="number" class="form-control" id="kmAmt">
+		</div>
+		<div class="form-group">
+			<label for="litersPer100KM">How many liters do you usually use per 100km?</label>
+			<input type="number" class="form-control" id="litersPer100KM">
+		</div>
+    <div class="form-group">
+      <label for="dieselPrice">Price of diesel per liter?</label>
+      <input type="number" class="form-control" id="dieselPrice">
+    </div>
+		<div class="form-group">
+			<label for="priceDifference">How much more expensive is E10 than diesel?</label>
+			<input type="number" class="form-control" id="priceDifference">
+		</div>  
+		<div class="form-group">
+			<label for="numOfRentalDays">How many days will you rent the car (Enterprise charges 5 EUR per day more for diesel rentals)?</label>
+			<input type="number" class="form-control" id="numOfRentalDays" step="1">
+		</div>    
+
+		<button class="btn btn-success" onclick="alertInfo()">Tell me, Diesel or Benzene?</button> 
+	</div>
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+function alertInfo() {
+
+	var kmAmt = document.getElementById('kmAmt').value;
+	var litersPer100KM = document.getElementById('litersPer100KM').value;
+	var priceDifference = document.getElementById('priceDifference').value;
+	var dieselPrice = document.getElementById('dieselPrice').value;
+	var numOfRentalDays = document.getElementById('numOfRentalDays').value;
+
+  var dieselRentalCost = kmAmt * (litersPer100KM / 100) * parseFloat(dieselPrice) + (numOfRentalDays * 5);
+  var benzeneRentalCost = kmAmt * (litersPer100KM / 100) * (parseFloat(dieselPrice) + parseFloat(priceDifference));
+	
+	var outString = "Cost of renting diesel car = " + dieselRentalCost.toFixed(2) + " EUR\n";
+	outString += "Cost of renting benzene car = " + benzeneRentalCost.toFixed(2) + " EUR\n";
+
+	alert( outString );
+}
+
+</script>
+</body>
+</html>
