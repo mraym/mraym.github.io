@@ -59,7 +59,7 @@
 
       for ( let i = 0, l = data.items.length; i < l; i++ ) {
 
-        output += data.items[i].timestamp + "<br/>";
+        output += new Date( data.items[i].timestamp ) + "<br/>";
       }
 
       document.getElementById('display-area').innerHTML = output;
