@@ -9,14 +9,26 @@
     <link rel="shortcut icon" href="/images/baby-bottle.ico" type="image/x-icon" />
     <!-- Bootstrap -->
     <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
   </head>
-  <body onload="addToLocalStorage( 'nighttime_feedings' )">
+  <body onload="displayLast10Entries( 'nighttime_feedings' )">
     <div class="container">
       <p id="display-area" class="lead"></p>
-      <button type="button" class="btn btn-danger btn-lg btn-block" onclick="removeLastItemInsertedInLocalStorage( 'nighttime_feedings' )">Remove Last Feeding</button>
-      <button type="button" class="btn btn-danger btn-lg btn-block" onclick="clearLocalStorage( 'nighttime_feedings' )">Delete All</button>
-
     </div><!-- /.container -->
+    <footer class="footer">
+      <div class="container">
+        <div class="col-xs-6">
+          <button type="button" class="btn btn-success btn-lg btn-block" onclick="addToLocalStorage( 'nighttime_feedings' )">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add</span>
+          </button>
+        </div>
+        <div class="col-xs-6">
+          <button type="button" class="btn btn-danger btn-lg btn-block" onclick="removeLastItemInsertedInLocalStorage( 'nighttime_feedings' )">
+            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Remove Last Entry</span>
+          </button>
+        </div>
+      </div>
+    </footer>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery/1.12.4/jquery.min.js"></script>
@@ -24,6 +36,42 @@
     <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
+
+    function displayLast10Entries( dataName ) {
+
+      // Get data from browser local storage
+      var data = localStorage.getItem( dataName );
+
+      // The data is stringified, so you have
+      // to turn it into a JSON object
+      var parsedData = JSON.parse( data );
+
+      // Create the JSON object if local storage is null
+      if ( parsedData === false ) {
+
+        parsedData = {
+          items: []
+        };
+      }
+
+      var parsedDataLength = parsedData.items.length;
+      var stopIndex = 0;
+
+      if ( parsedDataLength > 10 ) {
+        // Show only the last ten entries
+        stopIndex = parsedDataLength - 10
+      }
+
+      var output = "You've now fed your baby " + parsedDataLength + " times at night.<br/>Here are the last 10 entries:<br/>";
+
+      // List the items top-down with the latest occurence first
+      for ( let l = parsedDataLength, i = l-1; i >= stopIndex; i-- ) {
+
+        output += new Date( parsedData.items[i].timestamp ) + "<br/>";
+      }
+
+      document.getElementById('display-area').innerHTML = output;
+    }
 
     function removeLastItemInsertedInLocalStorage( dataName ) {
 
@@ -41,15 +89,7 @@
 
       localStorage.setItem( dataName, JSON.stringify( parsedData ) );
 
-      var output = "You've now fed your baby " + parsedData.items.length + " times at night.<br/>";
-
-      // List the items top-down with the latest occurence first
-      for ( let l = parsedData.items.length, i = l-1; i >= 0; i-- ) {
-
-        output += new Date( parsedData.items[i].timestamp ) + "<br/>";
-      }
-
-      document.getElementById('display-area').innerHTML = output;
+      displayLast10Entries( dataName );
     }
 
     function clearLocalStorage( dataName ) {
@@ -87,15 +127,7 @@
       // Store the recently changed item in local storage
       localStorage.setItem( dataName, JSON.stringify( data ) );
 
-      var output = "You've now fed your baby " + data.items.length + " times at night.<br/>";
-
-      // List the items top-down with the latest occurence first
-      for ( let l = data.items.length, i = l-1; i >= 0; i-- ) {
-
-        output += new Date( data.items[i].timestamp ) + "<br/>";
-      }
-
-      document.getElementById('display-area').innerHTML = output;
+      displayLast10Entries( dataName );
     }
 
     </script>
