@@ -73,6 +73,16 @@
   </section>
   <script src="js/localForage-1.5.5/dist/localforage.min.js"></script>
   <script>
+    window.indexedDB = window.indexedDB ||
+                       window.mozIndexedDB ||
+                       window.webkitIndexedDB ||
+                       window.msIndexedDB;
+    if (window.indexedDB) {
+      console.log("IndexedDB is supported.");
+    } else {
+      console.log("IndexedDB is not supprorted.");
+    }
+
     // Forcing IndexedDB here.
     localforage.setDriver(localforage.INDEXEDDB).then(function() {
       var key = 'STORE_KEY';
