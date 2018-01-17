@@ -86,6 +86,7 @@
         localforage.getItem(key).then(function(readValue) {
           console.log('Read: ', readValue);
         }).catch(function(err) {
+          alert( "Sorry, your browser can't use this" );
           console.error('Read: ', err);
         });
         // Since this key hasn't been set yet, we'll get a null value
