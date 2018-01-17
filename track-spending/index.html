@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Track Spending</title>
+    <link rel="stylesheet" href="css/bulma-0.6.2.min.css">
+    <script defer src="js/fontawesome-5.0.0.all.js"></script>
+  </head>
+  <body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">
+        Track Spending
+      </h1>
+      <div class="field">
+        <label class="label">Amount</label>
+        <div class="control has-icons-left">
+          <input class="input" type="number" placeholder="How much did you pay?">
+          <span class="icon is-small is-left">
+            <i class="fas fa-dollar-sign"></i>
+          </span>
+        </div>
+      </div><!-- end: amount field -->
+      <div class="field">
+        <label class="label">Store Name</label>
+        <div class="control has-icons-left">
+          <input class="input" type="text" placeholder="Where did you spend this money?">
+          <span class="icon is-small is-left">
+            <i class="fas fa-university"></i>
+          </span>
+        </div>
+      </div><!-- end: store name field -->
+      <div class="field">
+        <label class="label">Description</label>
+        <div class="control has-icons-left">
+          <input class="input" type="text" placeholder="Any additional details?">
+          <span class="icon is-small is-left">
+            <i class="fas fa-asterisk"></i>
+          </span>
+        </div>
+      </div><!-- end: store name field -->
+      <div class="field">
+        <label class="label">Category</label>
+        <div class="control">
+          <div class="select">
+            <select name="category">
+              <option value="">Select A Category</option>
+              <option value="Groceries">Groceries</option>
+              <option value="Restaurants">Restaurants</option>
+            </select>
+          </div>
+        </div>
+      </div><!-- end: category field -->
+    </div>
+  </section>
+  </body>
+</html>
