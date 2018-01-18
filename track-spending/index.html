@@ -38,45 +38,58 @@
         </ul>
       </div>
       <div id="enter-data" class="column" style="display: block;">
-      <div class="field">
-        <label class="label">Amount</label>
-        <div class="control has-icons-left">
-          <input class="input" type="number" placeholder="How much did you pay?">
-          <span class="icon is-small is-left">
-            <i class="fas fa-dollar-sign"></i>
-          </span>
-        </div>
-      </div><!-- end: amount field -->
-      <div class="field">
-        <label class="label">Store Name</label>
-        <div class="control has-icons-left">
-          <input class="input" type="text" placeholder="Where did you spend this money?">
-          <span class="icon is-small is-left">
-            <i class="fas fa-university"></i>
-          </span>
-        </div>
-      </div><!-- end: store name field -->
-      <div class="field">
-        <label class="label">Description</label>
-        <div class="control has-icons-left">
-          <input class="input" type="text" placeholder="Any additional details?">
-          <span class="icon is-small is-left">
-            <i class="fas fa-asterisk"></i>
-          </span>
-        </div>
-      </div><!-- end: store name field -->
-      <div class="field">
-        <label class="label">Category</label>
-        <div class="control">
-          <div class="select">
-            <select name="category">
-              <option value="">Select A Category</option>
-              <option value="Groceries">Groceries</option>
-              <option value="Restaurants">Restaurants</option>
-            </select>
+        <div class="field">
+          <label class="label">Amount</label>
+          <div class="control has-icons-left">
+            <input id="amount" class="input" type="number" placeholder="How much did you pay?">
+            <span class="icon is-small is-left">
+              <i class="fas fa-dollar-sign"></i>
+            </span>
           </div>
-        </div>
-      </div><!-- end: category field -->
+        </div><!-- end: amount field -->
+        <div class="field">
+          <label class="label">Store Name</label>
+          <div class="control has-icons-left">
+            <input id="store-name" class="input" type="text" placeholder="Where did you spend this money?">
+            <span class="icon is-small is-left">
+              <i class="fas fa-university"></i>
+            </span>
+          </div>
+        </div><!-- end: store name field -->
+        <div class="field">
+          <label class="label">Description</label>
+          <div class="control has-icons-left">
+            <input id="description" class="input" type="text" placeholder="Any additional details?">
+            <span class="icon is-small is-left">
+              <i class="fas fa-asterisk"></i>
+            </span>
+          </div>
+        </div><!-- end: store name field -->
+        <div class="field">
+          <label class="label">Category</label>
+          <div class="control">
+            <div class="select">
+              <select id="category" name="category">
+                <option value="">Select A Category</option>
+                <option value="Groceries">Groceries</option>
+                <option value="Restaurants">Restaurants</option>
+              </select>
+            </div>
+          </div>
+        </div><!-- end: category field -->
+      
+        <div class="field is-grouped">
+          <p class="control">
+            <a onclick="addToLocalDB()" class="button is-success">
+              Add
+            </a>
+          </p>
+          <p class="control">
+            <a class="button is-danger">
+              Clear
+            </a>
+          </p>
+        </div> 
       </div><!-- end: enter-data -->
 
       <div id="list-entries" class="column" style="display: none;">
@@ -89,67 +102,6 @@
     </div>
   </section>
   <script src="js/localForage-1.5.5/dist/localforage.min.js"></script>
-  <script>
-    function showTab( tabId ) {
-      if (tabId === "enter-data") {
-        document.getElementById( "enter-data" ).style.display = "block";
-        document.getElementById( "list-entries" ).style.display = "none";
-        document.getElementById( "analyze" ).style.display = "none";
-        document.getElementById( "enter-data-list-item" ).classList.add("is-active");
-        document.getElementById( "list-entries-list-item" ).classList.remove("is-active");
-        document.getElementById( "analyze-list-item" ).classList.remove("is-active");
-      }
-      else if (tabId === "list-entries") {
-        document.getElementById( "enter-data" ).style.display = "none";
-        document.getElementById( "list-entries" ).style.display = "block";
-        document.getElementById( "analyze" ).style.display = "none";
-        document.getElementById( "enter-data-list-item" ).classList.remove("is-active");
-        document.getElementById( "list-entries-list-item" ).classList.add("is-active");
-        document.getElementById( "analyze-list-item" ).classList.remove("is-active");
-      }
-      else if (tabId === "analyze") {
-        document.getElementById( "enter-data" ).style.display = "none";
-        document.getElementById( "list-entries" ).style.display = "none";
-        document.getElementById( "analyze" ).style.display = "block";
-        document.getElementById( "enter-data-list-item" ).classList.remove("is-active");
-        document.getElementById( "list-entries-list-item" ).classList.remove("is-active");
-        document.getElementById( "analyze-list-item" ).classList.add("is-active");
-      }
-      document.getElementById( tabId ).style.display = "block";
-    }
-
-    window.indexedDB = window.indexedDB ||
-                       window.mozIndexedDB ||
-                       window.webkitIndexedDB ||
-                       window.msIndexedDB;
-    if (window.indexedDB) {
-      console.log("IndexedDB is supported.");
-    } else {
-      console.log("IndexedDB is not supprorted.");
-    }
-
-    // Forcing IndexedDB here.
-    localforage.setDriver(localforage.INDEXEDDB).then(function() {
-      var key = 'STORE_KEY';
-      var value = new Uint8Array(8);
-      value[0] = 65
-      var UNKNOWN_KEY = 'unknown_key';
-      localforage.setItem(key, value, function() {
-        console.log('Saved: ' + value);
-        // causes InvalidState erros
-        localforage._dbInfo.db.close();
-        localforage.getItem(key).then(function(readValue) {
-          console.log('Read: ', readValue);
-        }).catch(function(err) {
-          alert( "Sorry, your browser can't use this" );
-          console.error('Read: ', err);
-        });
-        // Since this key hasn't been set yet, we'll get a null value
-        localforage.getItem(UNKNOWN_KEY).then(function(err, readValue) {
-          console.log('Result of reading ' + UNKNOWN_KEY, readValue);
-        });
-      });
-    });
-  </script>
+  <script src="js/app.js"></script>
   </body>
 </html>
