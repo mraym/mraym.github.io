@@ -63,6 +63,7 @@ function showLast10Entries() {
     items.push( value );
   }).then(function() {
     console.log('Iteration has completed');
+    console.log(JSON.stringify(items));
     return items;
   }).catch(function(err) {
     // This code runs if there were any errors
@@ -71,10 +72,9 @@ function showLast10Entries() {
 }
 
 var listEntriesDiv = new Vue({
-  el: '#list-entries',
+  el: '#entry-items',
   data: {
-    tabTitle: 'Showing last 10 entries',
-    items: showLast10Entries(),
+    items: showLast10Entries()
   }
 })
 

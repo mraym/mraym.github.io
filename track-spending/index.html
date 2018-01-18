@@ -93,8 +93,8 @@
       </div><!-- end: enter-data -->
 
       <div id="list-entries" class="column" style="display: none;">
-        <h3>{{ tabTitle }}</h3>
-        <ul>
+        <h3>Listing last 10 entries</h3>
+        <ul id="entry-items">
           <li v-for="item in items">
             {{ item["amount"] }} - {{ item["store-name"]}} - {{ item["description"] }}
           </li>
