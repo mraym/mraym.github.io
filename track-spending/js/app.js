@@ -43,7 +43,7 @@ function addToLocalDB() {
     return localforage.getItem('key');
   }).then(function (value) {
     // we got our value
-    alert( "success: item added" + JSON.stringify(value) );
+    alert( "success: item added" );
     showTab('list-entries');
   }).catch(function (err) {
     // we got an error
@@ -52,6 +52,8 @@ function addToLocalDB() {
 }
 
 function showLast10Entries() {
+  listEntriesDiv.items = [];
+
   localforage.iterate(function(value, key, iterationNumber) {
     // Resulting key/value pair -- this callback
     // will be executed for every item in the
@@ -76,8 +78,6 @@ var listEntriesDiv = new Vue({
 })
 
 // Everything below this line gets executed onload
-alert( "called from js file 2!" );
-
 window.indexedDB = window.indexedDB ||
                     window.mozIndexedDB ||
                     window.webkitIndexedDB ||
