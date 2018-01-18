@@ -14,6 +14,7 @@ function showTab( tabId ) {
     document.getElementById( "enter-data-list-item" ).classList.remove("is-active");
     document.getElementById( "list-entries-list-item" ).classList.add("is-active");
     document.getElementById( "analyze-list-item" ).classList.remove("is-active");
+    showLast10Entries();
   }
   else if (tabId === "analyze") {
     document.getElementById( "enter-data" ).style.display = "none";
@@ -42,13 +43,34 @@ function addToLocalDB() {
     return localforage.getItem('key');
   }).then(function (value) {
     // we got our value
-    alert( "success: item added" + value);
+    alert( "success: item added" + JSON.stringify(value) );
     showTab('list-entries');
   }).catch(function (err) {
     // we got an error
     alert( "fail: item added" + err);
   });  
 }
+
+function showLast10Entries() {
+  localforage.iterate(function(value, key, iterationNumber) {
+    // Resulting key/value pair -- this callback
+    // will be executed for every item in the
+    // database.
+    console.log([key, JSON.stringify(value)]);
+  }).then(function() {
+    console.log('Iteration has completed');
+  }).catch(function(err) {
+    // This code runs if there were any errors
+    console.log(err);
+  });  
+}
+
+var listEntriesDiv = new Vue({
+  el: '#list-entries',
+  data: {
+    tabTitle: 'Showing last 10 entries'
+  }
+})
 
 // Everything below this line gets executed onload
 alert( "called from js file 2!" );
