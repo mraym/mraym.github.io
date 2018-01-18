@@ -52,13 +52,18 @@ function addToLocalDB() {
 }
 
 function showLast10Entries() {
+  let items = [];
+
   localforage.iterate(function(value, key, iterationNumber) {
     // Resulting key/value pair -- this callback
     // will be executed for every item in the
     // database.
-    console.log([key, JSON.stringify(value)]);
+    console.log([key, JSON.stringify(value)], iterationNumber);
+    //add it to the array
+    items.push( value );
   }).then(function() {
     console.log('Iteration has completed');
+    return items;
   }).catch(function(err) {
     // This code runs if there were any errors
     console.log(err);
@@ -68,7 +73,8 @@ function showLast10Entries() {
 var listEntriesDiv = new Vue({
   el: '#list-entries',
   data: {
-    tabTitle: 'Showing last 10 entries'
+    tabTitle: 'Showing last 10 entries',
+    items: showLast10Entries(),
   }
 })
 
