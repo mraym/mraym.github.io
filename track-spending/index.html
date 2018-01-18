@@ -30,6 +30,14 @@
       <h1 class="title">
         Track Spending
       </h1>
+      <div class="tabs">
+        <ul>
+          <li id="enter-data-list-item" class="is-active"><a onclick="showTab('enter-data')">Enter</a></li>
+          <li id="list-entries-list-item"><a onclick="showTab('list-entries')">List</a></li>
+          <li id="analyze-list-item"><a onclick="showTab('analyze')">Analyze</a></li>
+        </ul>
+      </div>
+      <div id="enter-data" class="column" style="display: block;">
       <div class="field">
         <label class="label">Amount</label>
         <div class="control has-icons-left">
@@ -69,10 +77,47 @@
           </div>
         </div>
       </div><!-- end: category field -->
+      </div><!-- end: enter-data -->
+
+      <div id="list-entries" class="column" style="display: none;">
+        <h3>List last 10 entries</h3>
+      </div><!-- end: list-entries -->
+
+      <div id="analyze" class="column" style="display: none;">
+        <h3>Analyze</h3>
+      </div><!-- end: analyze -->
     </div>
   </section>
   <script src="js/localForage-1.5.5/dist/localforage.min.js"></script>
   <script>
+    function showTab( tabId ) {
+      if (tabId === "enter-data") {
+        document.getElementById( "enter-data" ).style.display = "block";
+        document.getElementById( "list-entries" ).style.display = "none";
+        document.getElementById( "analyze" ).style.display = "none";
+        document.getElementById( "enter-data-list-item" ).classList.add("is-active");
+        document.getElementById( "list-entries-list-item" ).classList.remove("is-active");
+        document.getElementById( "analyze-list-item" ).classList.remove("is-active");
+      }
+      else if (tabId === "list-entries") {
+        document.getElementById( "enter-data" ).style.display = "none";
+        document.getElementById( "list-entries" ).style.display = "block";
+        document.getElementById( "analyze" ).style.display = "none";
+        document.getElementById( "enter-data-list-item" ).classList.remove("is-active");
+        document.getElementById( "list-entries-list-item" ).classList.add("is-active");
+        document.getElementById( "analyze-list-item" ).classList.remove("is-active");
+      }
+      else if (tabId === "analyze") {
+        document.getElementById( "enter-data" ).style.display = "none";
+        document.getElementById( "list-entries" ).style.display = "none";
+        document.getElementById( "analyze" ).style.display = "block";
+        document.getElementById( "enter-data-list-item" ).classList.remove("is-active");
+        document.getElementById( "list-entries-list-item" ).classList.remove("is-active");
+        document.getElementById( "analyze-list-item" ).classList.add("is-active");
+      }
+      document.getElementById( tabId ).style.display = "block";
+    }
+
     window.indexedDB = window.indexedDB ||
                        window.mozIndexedDB ||
                        window.webkitIndexedDB ||
