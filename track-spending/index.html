@@ -129,7 +129,7 @@
         </thead>
         <tbody>
           <tr v-for="item in items">
-            <td>{{ Date(item["timestamp"]).toLocaleString() }}</td>
+            <td>{{ (new Date(item["timestamp"])).toLocaleString() }}</td>
             <td>{{ item["store-name"] }}</td>
             <td class="has-text-right">{{ Number(item["amount"]).toFixed(2) }}</td>
           </tr>
