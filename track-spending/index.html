@@ -47,9 +47,9 @@
             <p class="control">
               <span class="select">
                 <select>
-                  <option>$</option>
-                  <option>£</option>
-                  <option>€</option>
+                  <option value="USD">$</option>
+                  <option value="GBP">£</option>
+                  <option value="EUR">€</option>
                 </select>
               </span>
             </p>
@@ -67,17 +67,17 @@
             </div>
           </div><!-- end: store name field -->
           <div class="field">
-              <label class="label">Payment Type</label>
-              <div class="control is-expanded">
-                <div class="select">
-                  <select id="pay-type" name="pay-type">
-                    <option value="Credit Card">Credit Card</option>
-                    <option value="Debit Card">Debit Card</option>
-                    <option value="Cash">Cash</option>
-                  </select>
-                </div>
+            <label class="label">Payment Type</label>
+            <div class="control is-expanded">
+              <div class="select">
+                <select id="pay-type" name="pay-type">
+                  <option value="Credit Card">Credit Card</option>
+                  <option value="Debit Card">Debit Card</option>
+                  <option value="Cash">Cash</option>
+                </select>
               </div>
-            </div><!-- end: category field -->            
+            </div>
+          </div><!-- end: pay type field -->            
           <div class="field">
             <label class="label">Description</label>
             <div class="control has-icons-left">
@@ -139,6 +139,22 @@
 
     <div id="analyze" class="column" style="display: none;">
       <h3>Analyze</h3>
+      <table id="analysis-items" class="table">
+        <tbody>
+          <tr>
+            <td>total (today):</td>
+            <td class="has-text-right">{{ Number(totalToday).toFixed(2) }}</td>
+          </tr>
+          <tr>
+            <td>total (month):</td>
+            <td class="has-text-right">{{ Number(totalMonth).toFixed(2) }}</td>
+          </tr>
+          <tr>
+            <td>total (year-to-date):</td>
+            <td class="has-text-right">{{ Number(totalYTD).toFixed(2) }}</td>
+          </tr>                 
+        </tbody>
+      </table>      
     </div><!-- end: analyze -->
   </section>
   <script src="js/localForage-1.5.5/dist/localforage.min.js"></script>

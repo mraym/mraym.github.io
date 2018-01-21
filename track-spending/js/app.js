@@ -43,11 +43,10 @@ function addToLocalDB() {
     return localforage.getItem('key');
   }).then(function (value) {
     // we got our value
-    alert( "success: item added" );
     showTab('list-entries');
   }).catch(function (err) {
     // we got an error
-    alert( "fail: item added" + err);
+    alert("adding item failed");
   });  
 }
 
@@ -69,10 +68,59 @@ function showLast10Entries() {
   });  
 }
 
+function analyze() {
+  let totalToday = 0;
+  let totalMonth = 0;
+  let totalYTD = 0;
+
+  localforage.iterate(function(value, key, iterationNumber) {
+    // Resulting key/value pair -- this callback
+    // will be executed for every item in the
+    // database.
+    today = new Date();
+    todayMonth = today.getMonth();
+    todayYear = today.getFullYear();
+    currentItemDate = new Date(value["timestamp"]);
+    currentItemMonth = currentItemDate.getMonth();
+    currentItemYear = today.getFullYear();
+
+    let amount = Number(value["amount"]);
+    if (today >= currentItemDate) {
+      totalToday += amount;
+    }
+
+    if (todayMonth === currentItemMonth) {
+      totalMonth += amount;
+    }
+
+    if (todayYear === currentItemYear) {
+      totalYTD += amount;
+    }
+  }).then(function() {
+    console.log('Iteration has completed');
+    analysisEntriesDiv.totalToday = totalToday;
+    analysisEntriesDiv.totalMonth = totalMonth;
+    analysisEntriesDiv.totalYTD = totalYTD;
+  }).catch(function(err) {
+    // This code runs if there were any errors
+    console.log(err);
+  });   
+}
+
+// populate #entry items
 var listEntriesDiv = new Vue({
   el: '#entry-items',
   data: {
     items: []
+  }
+})
+
+var analysisEntriesDiv = new Vue({
+  el: '#analysis-items',
+  data: {
+    totalToday: 0,
+    totalMonth: 0,
+    totalYTD: 0
   }
 })
 
@@ -84,7 +132,7 @@ window.indexedDB = window.indexedDB ||
 if (window.indexedDB) {
   console.log("IndexedDB is supported.");
 } else {
-  console.log("IndexedDB is not supprorted.");
+  console.log("IndexedDB is not supported.");
 }
 
 // Set up localforage to use IndexedDB
