@@ -23,6 +23,7 @@ function showTab( tabId ) {
     document.getElementById( "enter-data-list-item" ).classList.remove("is-active");
     document.getElementById( "list-entries-list-item" ).classList.remove("is-active");
     document.getElementById( "analyze-list-item" ).classList.add("is-active");
+    analyze();
   }
   document.getElementById( tabId ).style.display = "block";
 }
