@@ -82,15 +82,15 @@ function analyze() {
     currentItemDate = (new Date(value["timestamp"])).toISOString();
 
     let amount = Number(value["amount"]);
-    if (today.toISOString().slice(0,10) === currentItem.toISOString().slice(0,10)) {
+    if (today.slice(0,10) === currentItemDate.slice(0,10)) {
       totalToday += amount;
     }
     
-    if (today.toISOString().slice(0,7) === currentItem.toISOString().slice(0,7)) {
+    if (today.slice(0,7) === currentItemDate.slice(0,7)) {
       totalMonth += amount;
     }
 
-    if (today.toISOString().slice(0,4) === currentItem.toISOString().slice(0,4))  {
+    if (today.slice(0,4) === currentItemDate.slice(0,4))  {
       totalYTD += amount;
     }
   }).then(function() {
