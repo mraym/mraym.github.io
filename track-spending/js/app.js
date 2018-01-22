@@ -78,23 +78,19 @@ function analyze() {
     // Resulting key/value pair -- this callback
     // will be executed for every item in the
     // database.
-    today = new Date();
-    todayMonth = today.getMonth();
-    todayYear = today.getFullYear();
-    currentItemDate = new Date(value["timestamp"]);
-    currentItemMonth = currentItemDate.getMonth();
-    currentItemYear = today.getFullYear();
+    today = (new Date()).toISOString();
+    currentItemDate = (new Date(value["timestamp"])).toISOString();
 
     let amount = Number(value["amount"]);
-    if (today >= currentItemDate) {
+    if (today.toISOString().slice(0,10) === currentItem.toISOString().slice(0,10)) {
       totalToday += amount;
     }
-
-    if (todayMonth === currentItemMonth) {
+    
+    if (today.toISOString().slice(0,7) === currentItem.toISOString().slice(0,7)) {
       totalMonth += amount;
     }
 
-    if (todayYear === currentItemYear) {
+    if (today.toISOString().slice(0,4) === currentItem.toISOString().slice(0,4))  {
       totalYTD += amount;
     }
   }).then(function() {
