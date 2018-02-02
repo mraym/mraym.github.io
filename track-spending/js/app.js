@@ -113,6 +113,11 @@ var listEntriesDiv = new Vue({
   el: '#entry-items',
   data: {
     items: []
+  },
+  methods: {
+    handleItemClick: function(itemId) {
+      showItemDetails(itemId);
+    }
   }
 })
 
