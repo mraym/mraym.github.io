@@ -104,6 +104,10 @@ function analyze() {
   });   
 }
 
+function showItemDetails(itemId) {
+  alert( itemId );
+}
+
 // populate #entry items
 var listEntriesDiv = new Vue({
   el: '#entry-items',
