@@ -33,9 +33,15 @@
     </div>
     <div class="tabs is-centered">
       <ul>
-        <li id="enter-data-list-item" class="is-active"><a onclick="showTab('enter-data')">Enter</a></li>
-        <li id="list-entries-list-item"><a onclick="showTab('list-entries')">List</a></li>
-        <li id="analyze-list-item"><a onclick="showTab('analyze')">Analyze</a></li>
+        <li id="enter-data-list-item" class="is-active">
+          <a onclick="showTab('enter-data')">Enter</a>
+        </li>
+        <li id="list-entries-list-item">
+          <a onclick="showTab('list-entries')">List</a>
+        </li>
+        <li id="analyze-list-item">
+          <a onclick="showTab('analyze')">Analyze</a>
+        </li>
       </ul>
     </div>
     <div id="enter-data" class="column" style="display: block;">
@@ -54,13 +60,15 @@
               </span>
             </p>
             <p class="control is-expanded">
-              <input id="amount" class="input" type="number" placeholder="How much did you pay?">
+              <input id="amount" class="input" type="number" 
+                placeholder="How much did you pay?">
             </p>
           </div><!-- end: amount field -->
           <div class="field">
             <label class="label">Store Name</label>
             <div class="control has-icons-left">
-              <input id="store-name" class="input" type="text" placeholder="Where did you spend this money?">
+              <input id="store-name" class="input" type="text" 
+                placeholder="Where did you spend this money?">
               <span class="icon is-small is-left">
                 <i class="fas fa-university"></i>
               </span>
@@ -81,7 +89,8 @@
           <div class="field">
             <label class="label">Description</label>
             <div class="control has-icons-left">
-              <input id="description" class="input" type="text" placeholder="Any additional details?">
+              <input id="description" class="input" type="text" 
+                placeholder="Any additional details?">
               <span class="icon is-small is-left">
                 <i class="fas fa-asterisk"></i>
               </span>
@@ -128,11 +137,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in items">
-            <td>{{ (new Date(item["timestamp"])).toLocaleString() }}</td>
-            <td>{{ item["store-name"] }}</td>
-            <td class="has-text-right">{{ Number(item["amount"]).toFixed(2) }}</td>
-          </tr>
+          <a href="#">
+            <tr v-for="item in items">
+              <td>{{ (new Date(item["timestamp"])).toLocaleString() }}</td>
+              <td>{{ item["store-name"] }}</td>
+              <td class="has-text-right">{{ Number(item["amount"]).toFixed(2) }}</td>
+            </tr>
+          </a>
         </tbody>
       </table>
     </div><!-- end: list-entries -->
