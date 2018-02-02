@@ -137,7 +137,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, key) in items" @click="showItemDetails(key)">
+          <tr v-for="(item, key) in items" onclick="showItemDetails(key)">
             <td>{{ (new Date(item["timestamp"])).toLocaleString() }}</td>
             <td>{{ item["store-name"] }}</td>
             <td class="has-text-right">{{ Number(item["amount"]).toFixed(2) }}</td>
