@@ -120,7 +120,7 @@ function showItemDetails(itemId) {
     document.getElementById("currentItemCategory").value 
       = value["category"];
 
-    let itemSummary = `Spent ${Number(value["amount"]).toFixed(2)} ${value["currency"]} on ${value["payType"]} at ${value["store-name"]} for ${value["description"]} - ${value["category"]}`;
+    let itemSummary = `Spent ${Number(value["amount"]).toFixed(2)} ${value["currency"]} on ${value["pay-type"]} at ${value["store-name"]} for ${value["description"]} - ${value["category"]}`;
 
     document.getElementById("currentItemSummary").innerHTML 
       = itemSummary;
