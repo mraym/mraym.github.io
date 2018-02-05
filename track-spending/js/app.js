@@ -124,12 +124,29 @@ function showItemDetails(itemId) {
 
     document.getElementById("currentItemSummary").innerHTML 
       = itemSummary;
+
+    currentItem = itemId;
+
     document.getElementById("item-modal").style.display = "block";      
   }).catch(function(err) {
     // This code runs if there were any errors
     console.log(err);
   });  
 }
+
+
+function deleteCurrentItem() {
+  localforage.removeItem(currentItem).then(function() {
+    // Run this code once the key has been removed.
+    alert("Item deleted!");
+    document.getElementById("item-modal").style.display = "none";
+}).catch(function(err) {
+    // This code runs if there were any errors
+    console.log(err);
+});
+}
+
+var currentItem = "";
 
 // populate #entry items
 var listEntriesDiv = new Vue({

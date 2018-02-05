@@ -171,6 +171,10 @@
   <div id="item-modal" class="modal" style="display: none;">
     <div class="modal-background"></div>
     <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Item details</p>
+        <button class="delete" aria-label="close"></button>
+      </header>      
       <section class="modal-card-body">
         <table class="table">
           <tbody>
@@ -196,7 +200,7 @@
       </section>
       <footer class="modal-card-foot">
         <button class="button is-success">Save changes</button>
-        <button class="button is-error">Delete Item</button>
+        <button onclick="deleteCurrentItem();" class="button is-danger">Delete Item</button>
       </footer>
     </div>
   </div><!-- end: item-modal -->
