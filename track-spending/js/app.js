@@ -35,7 +35,9 @@ function addToLocalDB() {
   let entry = {};
   entry["timestamp"] = today.toISOString();
   entry["amount"] = document.getElementById("amount").value;
+  entry["currency"] = document.getElementById("currency").value;
   entry["store-name"] = document.getElementById("store-name").value;
+  entry["pay-type"] = document.getElementById("pay-type").value;
   entry["description"] = document.getElementById("description").value;
   entry["category"] = document.getElementById("category").value;
 
