@@ -106,6 +106,16 @@ function analyze() {
 
 function showItemDetails(itemId) {
   alert( itemId );
+  let item = localforage.getItem(itemId);
+  document.getElementById("currentItemAmt").value 
+    = Number(item["amount"]).toFixed(2);
+  document.getElementById("currentItemStoreName").value 
+    = item["store-name"];  
+  document.getElementById("currentItemDesc").value 
+    = item["description"];
+  document.getElementById("currentItemCategory").value 
+    = item["category"];         
+  document.getElementById("item-modal").style.display = "block";
 }
 
 // populate #entry items
