@@ -115,8 +115,9 @@ var listEntriesDiv = new Vue({
     items: []
   },
   methods: {
-    handleItemClick: function(itemId) {
-      showItemDetails(itemId);
+    handleItemClick: function(item) {
+      let isoDateStr = new Date( item["timestamp"] ).getTime().toString();
+      showItemDetails(isoDateStr);
     }
   }
 })
