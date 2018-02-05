@@ -116,7 +116,12 @@ function showItemDetails(itemId) {
     document.getElementById("currentItemDesc").value 
       = value["description"];
     document.getElementById("currentItemCategory").value 
-      = value["category"];         
+      = value["category"];
+
+    let itemSummary = `Spent ${Number(value["amount"]).toFixed(2)} ${value["currency"]} on ${value["payType"]} at ${value["store-name"]} for ${value["description"]} - ${value["category"]}`;
+
+    document.getElementById("currentItemSummary").text 
+      = itemSummary;
     document.getElementById("item-modal").style.display = "block";      
   }).catch(function(err) {
     // This code runs if there were any errors
