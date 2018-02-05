@@ -105,17 +105,23 @@ function analyze() {
 }
 
 function showItemDetails(itemId) {
-  alert( itemId );
-  let item = localforage.getItem(itemId);
-  document.getElementById("currentItemAmt").value 
-    = Number(item["amount"]).toFixed(2);
-  document.getElementById("currentItemStoreName").value 
-    = item["store-name"];  
-  document.getElementById("currentItemDesc").value 
-    = item["description"];
-  document.getElementById("currentItemCategory").value 
-    = item["category"];         
-  document.getElementById("item-modal").style.display = "block";
+  localforage.getItem(itemId).then(function(value) {
+    // This code runs once the value has been loaded
+    // from the offline store.
+    console.log(value);
+    document.getElementById("currentItemAmt").value 
+      = Number(value["amount"]).toFixed(2);
+    document.getElementById("currentItemStoreName").value 
+      = value["store-name"];  
+    document.getElementById("currentItemDesc").value 
+      = value["description"];
+    document.getElementById("currentItemCategory").value 
+      = value["category"];         
+    document.getElementById("item-modal").style.display = "block";      
+  }).catch(function(err) {
+    // This code runs if there were any errors
+    console.log(err);
+  });  
 }
 
 // populate #entry items
