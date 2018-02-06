@@ -28,8 +28,8 @@ function showTab( tabId ) {
   document.getElementById( tabId ).style.display = "block";
 }
 
-function addToLocalDB() {
 
+function addToLocalDB() {
   today = new Date();
   // Get input
   let entry = {};
@@ -53,6 +53,7 @@ function addToLocalDB() {
   });  
 }
 
+
 function showLast10Entries() {
   listEntriesDiv.items = [];
 
@@ -70,6 +71,7 @@ function showLast10Entries() {
     console.log(err);
   });  
 }
+
 
 function analyze() {
   let totalToday = 0;
@@ -106,28 +108,32 @@ function analyze() {
   });   
 }
 
+
 function showItemDetails(itemId) {
   localforage.getItem(itemId).then(function(value) {
     // This code runs once the value has been loaded
     // from the offline store.
     console.log(value);
-    document.getElementById("currentItemAmt").value 
-      = Number(value["amount"]).toFixed(2);
-    document.getElementById("currentItemStoreName").value 
-      = value["store-name"];  
-    document.getElementById("currentItemDesc").value 
-      = value["description"];
-    document.getElementById("currentItemCategory").value 
-      = value["category"];
+    let amount = Number(value["amount"]).toFixed(2);
+    let currency = value["currency"];
+    let storeName = value["store-name"];
+    let payType = value["pay-type"];
+    let desc = value["description"];
+    let category = value["category"];
+    document.getElementById("currentItemAmt").value = amount;
+    document.getElementById("currentItemCurrency").value = currency;
+    document.getElementById("currentItemStoreName").value = storeName;
+    document.getElementById("currentItemPayType").value = payType;    
+    document.getElementById("currentItemDesc").value = desc;
+    document.getElementById("currentItemCategory").value = category
 
-    let itemSummary = `Spent ${Number(value["amount"]).toFixed(2)} ${value["currency"]} on ${value["pay-type"]} at ${value["store-name"]} for ${value["description"]} - ${value["category"]}`;
+    let itemSummary = `Spent ${amount} ${currency} on ${payType} at ${storeName} for ${desc} - ${category}`;
 
-    document.getElementById("currentItemSummary").innerHTML 
-      = itemSummary;
+    document.getElementById("currentItemSummary").innerHTML = itemSummary;
 
     currentItem = itemId;
 
-    document.getElementById("item-modal").style.display = "block";      
+    document.getElementById("item-modal").classList.add("is-active");      
   }).catch(function(err) {
     // This code runs if there were any errors
     console.log(err);
@@ -138,7 +144,7 @@ function showItemDetails(itemId) {
 function deleteCurrentItem() {
   localforage.removeItem(currentItem).then(function() {
     // Run this code once the key has been removed.
-    alert("Item deleted!");
+    //alert("Item deleted!");
     closeItemDetailsModal();
     showLast10Entries();
   }).catch(function(err) {
@@ -148,9 +154,11 @@ function deleteCurrentItem() {
 }
 
 function closeItemDetailsModal() {
-  document.getElementById("item-modal").style.display = "none";
+  currentItem = "";
+  document.getElementById("item-modal").classList.remove("is-active");
 }
 
+// initial state of currentItem
 var currentItem = "";
 
 // populate #entry items
