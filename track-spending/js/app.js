@@ -64,16 +64,16 @@ function showLast10Entries() {
     console.log([key, JSON.stringify(value)], iterationNumber);
     //add it to the array
     listEntriesDiv.items.push(value);
+  }).then(function() {
+    console.log('Iteration has completed');
     listEntriesDiv.items.sort((a,b) => {
-      console.log("sorting...");
+      console.log("sorting 2...");
       let aTimestamp = (new Date(a["timestamp"])).getTime();
       console.log(`aTimestamp = ${aTimestamp}`);
       let bTimestamp = (new Date(b["timestamp"])).getTime();
       console.log(`aTimestamp = ${bTimestamp}`);      
       return bTimestamp - aTimestamp;
-    });
-  }).then(function() {
-    console.log('Iteration has completed');
+    });    
   }).catch(function(err) {
     // This code runs if there were any errors
     console.log(err);
