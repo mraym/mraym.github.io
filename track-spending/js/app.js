@@ -55,16 +55,14 @@ function addToLocalDB() {
 
 
 function showEntries() {
-  //listEntriesDiv.items = [];
   let items = [];
 
   localforage.iterate(function(value, key, iterationNumber) {
     // Resulting key/value pair -- this callback
     // will be executed for every item in the
     // database.
-    console.log([key, JSON.stringify(value)], iterationNumber);
+    //console.log([key, JSON.stringify(value)], iterationNumber);
     //add it to the array
-    //listEntriesDiv.items.push(value);
     items.push(value);
   }).then(function() {
     console.log('Iteration has completed');
