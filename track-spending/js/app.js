@@ -153,6 +153,7 @@ function deleteCurrentItem() {
   });
 }
 
+
 function closeItemDetailsModal() {
   currentItem = "";
   document.getElementById("item-modal").classList.remove("is-active");

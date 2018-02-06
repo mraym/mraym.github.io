@@ -52,7 +52,7 @@
           <div class="field has-addons">
             <p class="control">
               <span class="select">
-                <select id="currency">
+                <select id="currency" name="currency">
                   <option value="USD">$</option>
                   <option value="GBP">£</option>
                   <option value="EUR">€</option>
@@ -183,9 +183,17 @@
               <td><input id="currentItemAmt" type="number" /></td>
             </tr>
             <tr>
+              <td>Currency:</td>
+              <td><input id="currentItemCurrency" type="text" /></td>
+            </tr>
+            <tr>
               <td>Store Name:</td>
               <td><input id="currentItemStoreName" type="text" /></td>
             </tr>
+            <tr>
+              <td>Payment Type:</td>
+              <td><input id="currentItemPayType" type="text" /></td>
+            </tr>            
             <tr>
               <td>Description:</td>
               <td><input id="currentItemDesc" type="text" /></td>
