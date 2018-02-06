@@ -64,6 +64,9 @@ function showLast10Entries() {
     console.log([key, JSON.stringify(value)], iterationNumber);
     //add it to the array
     listEntriesDiv.items.push(value);
+    listEntriesDiv.items.sort((a,b) => {
+      return b.amount - a.amount;
+    });
   }).then(function() {
     console.log('Iteration has completed');
   }).catch(function(err) {
