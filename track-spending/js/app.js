@@ -159,10 +159,6 @@ function closeItemDetailsModal() {
   document.getElementById("item-modal").classList.remove("is-active");
 }
 
-function sortByLatestTimeStamp(a, b) {
-  // show latest first
-  return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
-}
 
 // initial state of currentItem
 var currentItem = "";
@@ -177,11 +173,6 @@ var listEntriesDiv = new Vue({
     handleItemClick: function(item) {
       let isoDateStr = new Date( item["timestamp"] ).getTime().toString();
       showItemDetails(isoDateStr);
-    }
-  },
-  computed: {
-    sortedByDate: function(items) {
-      items.sort(sortByLatestTimeStamp);
     }
   }
 })
