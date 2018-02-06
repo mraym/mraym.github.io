@@ -181,7 +181,7 @@ var listEntriesDiv = new Vue({
   },
   computed: {
     sortedByDate: function() {
-      items.sort(sortByLatestTimeStamp);
+      data.items.sort(sortByLatestTimeStamp);
     }
   }
 })
