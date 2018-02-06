@@ -55,7 +55,8 @@ function addToLocalDB() {
 
 
 function showEntries() {
-  listEntriesDiv.items = [];
+  //listEntriesDiv.items = [];
+  let items = [];
 
   localforage.iterate(function(value, key, iterationNumber) {
     // Resulting key/value pair -- this callback
@@ -63,11 +64,12 @@ function showEntries() {
     // database.
     console.log([key, JSON.stringify(value)], iterationNumber);
     //add it to the array
-    listEntriesDiv.items.push(value);
+    //listEntriesDiv.items.push(value);
+    items.push(value);
   }).then(function() {
     console.log('Iteration has completed');
     console.log('Sorting list with date descending and redisplaying...')
-    listEntriesDiv.items.sort((a,b) => {
+    listEntriesDiv.items = items.sort((a,b) => {
       let aTimestamp = (new Date(a["timestamp"])).getTime();
       let bTimestamp = (new Date(b["timestamp"])).getTime();
       return bTimestamp - aTimestamp;
