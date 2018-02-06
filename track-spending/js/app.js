@@ -66,7 +66,11 @@ function showLast10Entries() {
     listEntriesDiv.items.push(value);
     listEntriesDiv.items.sort((a,b) => {
       console.log("sorting...");
-      return b.timestamp - a.timestamp;
+      let aTimestamp = (new Date(a["timestamp"])).getTime();
+      console.log(`aTimestamp = ${aTimestamp}`);
+      let bTimestamp = (new Date(b["timestamp"])).getTime();
+      console.log(`aTimestamp = ${bTimestamp}`);      
+      return bTimestamp - aTimestamp;
     });
   }).then(function() {
     console.log('Iteration has completed');
