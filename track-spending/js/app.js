@@ -55,7 +55,7 @@ function addToLocalDB() {
 
 
 function sortByLatestDateFirst(a, b) {
-  return (new Date(b.timestamp)).getTime() - (new Date(a.timestamp)).getTime();
+  return new Date(b["timestamp"]) - new Date(a["timestamp"]);
 }
 
 
@@ -80,7 +80,8 @@ function getItemsFromLocalDB() {
 
 
 function showLast10Entries() {
-  listEntriesDiv.items = getItemsFromLocalDB();  
+  listEntriesDiv.items = [];
+  listEntriesDiv.items = getItemsFromLocalDB();
 }
 
 
