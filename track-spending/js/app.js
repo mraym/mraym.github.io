@@ -14,7 +14,7 @@ function showTab( tabId ) {
     document.getElementById( "enter-data-list-item" ).classList.remove("is-active");
     document.getElementById( "list-entries-list-item" ).classList.add("is-active");
     document.getElementById( "analyze-list-item" ).classList.remove("is-active");
-    showLast10Entries();
+    showEntries();
   }
   else if (tabId === "analyze") {
     document.getElementById( "enter-data" ).style.display = "none";
@@ -54,7 +54,7 @@ function addToLocalDB() {
 }
 
 
-function showLast10Entries() {
+function showEntries() {
   listEntriesDiv.items = [];
 
   localforage.iterate(function(value, key, iterationNumber) {
@@ -66,12 +66,10 @@ function showLast10Entries() {
     listEntriesDiv.items.push(value);
   }).then(function() {
     console.log('Iteration has completed');
+    console.log('Sorting list with date descending and redisplaying...')
     listEntriesDiv.items.sort((a,b) => {
-      console.log("sorting 2...");
       let aTimestamp = (new Date(a["timestamp"])).getTime();
-      console.log(`aTimestamp = ${aTimestamp}`);
       let bTimestamp = (new Date(b["timestamp"])).getTime();
-      console.log(`aTimestamp = ${bTimestamp}`);      
       return bTimestamp - aTimestamp;
     });    
   }).catch(function(err) {
@@ -154,7 +152,7 @@ function deleteCurrentItem() {
     // Run this code once the key has been removed.
     //alert("Item deleted!");
     closeItemDetailsModal();
-    showLast10Entries();
+    showEntries();
   }).catch(function(err) {
       // This code runs if there were any errors
       console.log(err);
