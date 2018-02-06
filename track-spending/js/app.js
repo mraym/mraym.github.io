@@ -54,8 +54,13 @@ function addToLocalDB() {
 }
 
 
-function showLast10Entries() {
-  listEntriesDiv.items = [];
+function sortByLatestDateFirst(a, b) {
+  return (new Date(b.timestamp)).getTime() - (new Date(a.timestamp)).getTime();
+}
+
+
+function getItemsFromLocalDB() {
+  let items = [];
 
   localforage.iterate(function(value, key, iterationNumber) {
     // Resulting key/value pair -- this callback
@@ -63,13 +68,19 @@ function showLast10Entries() {
     // database.
     console.log([key, JSON.stringify(value)], iterationNumber);
     //add it to the array
-    listEntriesDiv.items.push(value);
+    items.push(value);
   }).then(function() {
     console.log('Iteration has completed');
+    return items.sort(sortByLatestDateFirst);
   }).catch(function(err) {
     // This code runs if there were any errors
     console.log(err);
   });  
+}
+
+
+function showLast10Entries() {
+  listEntriesDiv.items = getItemsFromLocalDB();  
 }
 
 
