@@ -65,7 +65,8 @@ function showLast10Entries() {
     //add it to the array
     listEntriesDiv.items.push(value);
     listEntriesDiv.items.sort((a,b) => {
-      return b.amount - a.amount;
+      console.log("sorting...");
+      return b.timestamp - a.timestamp;
     });
   }).then(function() {
     console.log('Iteration has completed');
