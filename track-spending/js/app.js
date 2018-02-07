@@ -148,17 +148,20 @@ function showItemDetails(itemId) {
 
 
 function shareItem() {
+  alert( "Share button clicked!" );
+
   let itemTextToShare = document.getElementById("currentItemSummary").innerHTML ||
     "Sorry, your browser and/or phone doesn't allow sharing.";
   if (navigator.share) {
+    alert( `Share is allowed. Yay! Will now try to share ${itemTextToShare}` );
     navigator.share({
         title: 'Track Spending Item',
         text: itemTextToShare
     }).then(function() {
-      console.log('Successful share')
+      alert('Successful share')
     }).catch(function(err) {
         // This code runs if there were any errors
-        console.log('Error sharing', err);
+        alert('Error sharing', err);
     });
   }    
 }
