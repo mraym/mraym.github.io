@@ -148,20 +148,21 @@ function showItemDetails(itemId) {
 
 
 function shareItem() {
-  alert( "Share button clicked!" );
+  //alert( "Share button clicked!" );
 
   let itemTextToShare = document.getElementById("currentItemSummary").innerHTML ||
     "Sorry, your browser and/or phone doesn't allow sharing.";
   if (navigator.share) {
-    alert( `Share is allowed. Yay! Will now try to share ${itemTextToShare}` );
+    //alert( `Share is allowed. Yay! Will now try to share ${itemTextToShare}` );
     navigator.share({
         title: 'Track Spending Item',
         text: itemTextToShare
     }).then(function() {
-      alert('Successful share')
+      //alert('Successful share');
+      console.log('Successful share');
     }).catch(function(err) {
-        // This code runs if there were any errors
-        alert('Error sharing', err);
+      // This code runs if there were any errors
+      alert('Error sharing', err);
     });
   }    
 }
