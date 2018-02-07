@@ -149,11 +149,12 @@ function showItemDetails(itemId) {
 
 function shareItem() {
   //alert( "Share button clicked!" );
+  console.log( "Share button clicked! Let's see if anything else happens." );
 
   let itemTextToShare = document.getElementById("currentItemSummary").innerHTML ||
     "Sorry, your browser and/or phone doesn't allow sharing.";
   if (navigator.share) {
-    //alert( `Share is allowed. Yay! Will now try to share ${itemTextToShare}` );
+    console.log( `Share is allowed. Yay! Will now try to share ${itemTextToShare}` );
     navigator.share({
         title: 'Track Spending Item',
         text: itemTextToShare
@@ -164,7 +165,10 @@ function shareItem() {
       // This code runs if there were any errors
       alert('Error sharing', err);
     });
-  }    
+  } 
+  else {
+    alert("Sorry, this only works on Android Chrome.")
+  }  
 }
 
 
