@@ -147,6 +147,23 @@ function showItemDetails(itemId) {
 }
 
 
+function shareItem() {
+  let itemTextToShare = document.getElementById("currentItemSummary").innerHTML ||
+    "Sorry, your browser and/or phone doesn't allow sharing.";
+  if (navigator.share) {
+    navigator.share({
+        title: 'Track Spending Item',
+        text: itemTextToShare
+    }).then(function() {
+      console.log('Successful share')
+    }).catch(function(err) {
+        // This code runs if there were any errors
+        console.log('Error sharing', err);
+    });
+  }    
+}
+
+
 function deleteCurrentItem() {
   localforage.removeItem(currentItem).then(function() {
     // Run this code once the key has been removed.
