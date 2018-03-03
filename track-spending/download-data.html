@@ -8,6 +8,27 @@
   <div id="showJson"></div>
 
 <script>
+// Everything below this line gets executed onload
+window.indexedDB = window.indexedDB ||
+                    window.mozIndexedDB ||
+                    window.webkitIndexedDB ||
+                    window.msIndexedDB;
+if (window.indexedDB) {
+  console.log("IndexedDB is supported.");
+} else {
+  console.log("IndexedDB is not supported.");
+}
+
+// Set up localforage to use IndexedDB
+localforage.config({
+  driver      : localforage.INDEXEDDB, // Force INDEXEDDB; same as using setDriver()
+  name        : 'myApp',
+  version     : 1.0,
+  size        : 4980736, // Size of database, in bytes. WebSQL-only for now.
+  storeName   : 'spending', // Should be alphanumeric, with underscores.
+  description : 'track spending'
+});
+  
 function downloadCurrentSavedData() {
 
   let entries = [];
