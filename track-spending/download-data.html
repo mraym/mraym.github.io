@@ -7,6 +7,7 @@
 <body onload="downloadCurrentSavedData()">
   <div id="showJson"></div>
 
+<script src="js/localForage-1.5.5/dist/localforage.min.js"></script>
 <script>
 // Everything below this line gets executed onload
 window.indexedDB = window.indexedDB ||
@@ -28,7 +29,7 @@ localforage.config({
   storeName   : 'spending', // Should be alphanumeric, with underscores.
   description : 'track spending'
 });
-  
+
 function downloadCurrentSavedData() {
 
   let entries = [];
