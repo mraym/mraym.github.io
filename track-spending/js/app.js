@@ -185,6 +185,42 @@ function deleteCurrentItem() {
 }
 
 
+function downloadCurrentSavedData() {
+
+  console.log( "Export button clicked! Let's see if anything else happens." );
+
+  let entries = [];
+
+  localforage.iterate(function(value, key, iterationNumber) {
+    // Resulting key/value pair -- this callback
+    // will be executed for every item in the
+    // database.
+    //console.log([key, JSON.stringify(value)], iterationNumber);
+    //add it to the array  
+    entries.push(value);
+  }).then(function() {
+    console.log('Iteration has completed');
+    let strEntries = JSON.stringify(entries);
+    console.log(`downloading as json = ${strEntries}`);
+
+    // create download link from indexeddb entries
+    let dataStr = "data:text/json;charset=utf-8," + 
+      encodeURIComponent(strEntries);
+    let downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href",     dataStr);
+    downloadAnchorNode.setAttribute("download", 'mraym-track-spending-backup.json');
+
+    // download the data to your local
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+  }).catch(function(err) {
+    // This code runs if there were any errors
+    console.log(err);
+  });   
+}
+
+
+
 function closeItemDetailsModal() {
   currentItem = "";
   document.getElementById("item-modal").classList.remove("is-active");
