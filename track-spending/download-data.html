@@ -47,7 +47,7 @@ function downloadCurrentSavedData() {
     console.log(`downloading as json = ${strEntries}`);
 
     // create download link from indexeddb entries
-    let dataStr = "data:text/json;charset=utf-8," + 
+    let dataStr = "data:application/json;charset=utf-8," + 
       encodeURIComponent(strEntries);
     let downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute("href",     dataStr);
