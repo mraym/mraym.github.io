@@ -46,7 +46,16 @@ function downloadCurrentSavedData() {
     let strEntries = JSON.stringify(entries);
     console.log(`downloading as json = ${strEntries}`);
 
-    document.getElementById("showJson").innerHTML = strEntries;
+    // create download link from indexeddb entries
+    let dataStr = "data:text/json;charset=utf-8," + 
+      encodeURIComponent(strEntries);
+    let downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href",     dataStr);
+
+    // download the data to your local
+    downloadAnchorNode.click();
+
+    //document.getElementById("showJson").innerHTML = strEntries;
   }).catch(function(err) {
     // This code runs if there were any errors
     console.log(err);
