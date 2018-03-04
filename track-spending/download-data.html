@@ -46,14 +46,10 @@ function downloadCurrentSavedData() {
     let strEntries = JSON.stringify(entries);
     console.log(`downloading as json = ${strEntries}`);
 
-    // create download link from indexeddb entries
-    let dataStr = "data:application/json;charset=utf-8," + 
-      encodeURIComponent(strEntries);
-    let downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href",     dataStr);
-
-    // download the data to your local
-    downloadAnchorNode.click();
+    let a = document.createElement("a");
+    let file = new Blob([strEntries], {type: "application/json"});
+    a.href = URL.createObjectURL(file);
+    a.click();
 
     //document.getElementById("showJson").innerHTML = strEntries;
   }).catch(function(err) {
